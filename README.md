@@ -23,7 +23,3 @@ A scalable React Native app built with Expo Router, TypeScript, and modern tools
 - TanStack Query: API fetching
 - React Native Paper: UI components
 - Sentry: Error tracking
-
-## Handy Stuff
-
-- npx expo prebuild --skip-dependency-update react-native,react
