@@ -54,13 +54,11 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <Image
-        width={40}
-        height={40}
         style={styles.profileImage}
         source={{
           uri: getImage(),
         }}
-        resizeMode="cover"
+        resizeMode="contain"
       />
       <Text
         style={styles.bio}
@@ -94,10 +92,9 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   profileImage: {
-    width: 150,
-    height: 150,
-    borderRadius: 75,
-    marginBottom: 20,
+    width: 80,
+    height: 80,
+    borderRadius: 40,
   },
   bio: {
     fontSize: 12,
