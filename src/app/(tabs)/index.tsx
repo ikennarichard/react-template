@@ -67,7 +67,6 @@ export default function HomeScreen() {
       >{`${creator.firstName} ${creator.lastName}`}</Text>
       <AppText style={styles.bio} text={`Company: ${creator.company.name}`} />
       <Text style={styles.bio}>{creator.email}</Text>
-      <Text style={styles.bio}>Gender: {creator.gender}</Text>
       <Animated.View style={[styles.followButton, animatedStyle]}>
         <AppButton
           title={isFollowing.value ? 'Unfollow' : 'Follow'}

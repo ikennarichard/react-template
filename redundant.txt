@@ -1,0 +1,3 @@
+  const router = useRouter();
+
+  npx expo customize metro.config.js - create metro in expo

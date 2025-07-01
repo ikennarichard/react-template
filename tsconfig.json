@@ -9,8 +9,17 @@
     "baseUrl": "./",
     "jsx": "react-native",
     "paths": {
-      "@/*": ["src/*"],
+      "@/*": [
+        "src/*"
+      ]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts", "jest.config.js"]
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    ".expo/types/**/*.ts",
+    "expo-env.d.ts",
+    "jest.config.js",
+    "nativewind-env.d.ts"
+  ]
 }
