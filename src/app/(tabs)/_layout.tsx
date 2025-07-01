@@ -1,5 +1,6 @@
 import Icon from '@expo/vector-icons/MaterialIcons';
 import { Tabs } from 'expo-router';
+import '../../../global.css';
 
 export default function TabLayout() {
   return (
@@ -19,20 +20,11 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="profile"
+        name="messaging"
         options={{
-          title: 'Profile',
+          title: 'Messages',
           tabBarIcon: ({ color }) => (
-            <Icon name="person" size={24} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="settings"
-        options={{
-          title: 'Settings',
-          tabBarIcon: ({ color }) => (
-            <Icon name="settings" size={24} color={color} />
+            <Icon name="message" size={24} color={color} />
           ),
         }}
       />

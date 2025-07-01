@@ -1,57 +1,96 @@
-import Button from '@/components/Button';
-import { useUser } from '@/services/api';
-import { Link, router } from 'expo-router';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import AppButton from '@/components/AppButton';
+import AppText from '@/components/AppText';
+import { getCreator } from '@/services/api';
+import { useAppStore } from '@/store';
+import { useLocalSearchParams, useRouter } from 'expo-router';
+import { useEffect, useState } from 'react';
+import { Animated, Image, StyleSheet, Text, View } from 'react-native';
+import {
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+} from 'react-native-reanimated';
+
+type Creator = {
+  id: number;
+  firstName: string;
+  lastName: string;
+  image: string;
+  email: string;
+  gender: string;
+  company: {
+    name: string;
+  };
+};
 
 export default function HomeScreen() {
-  const { data: user, isLoading } = useUser('1');
+  const router = useRouter();
+  const { creatorId = '1' } = useLocalSearchParams();
+  const [creator, setCreator] = useState<Creator | null>(null);
+  const { followedCreators, toggleFollow } = useAppStore();
+  const isFollowing = useSharedValue(
+    followedCreators.includes(Number(creatorId)) ? 1 : 0
+  );
 
-  const data = [
-    { id: '1', title: 'Task 1' },
-    { id: '2', title: 'Task 2' },
-  ];
+  // Effects
+  useEffect(() => {
+    getCreator(Number(creatorId)).then(setCreator).catch(console.error);
+  }, [creatorId]);
+
+  useEffect(() => {
+    isFollowing.value = followedCreators.includes(Number(creatorId)) ? 1 : 0;
+  }, [followedCreators, creatorId]);
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: withSpring(isFollowing.value ? 1.2 : 1) }],
+    backgroundColor: isFollowing.value ? '#4caf50' : '#2196f3',
+  }));
+
+  if (!creator) return <AppText text="Loading..." />;
+
+  const getImage = () =>
+    `https://randomuser.me/api/portraits/${creator.gender === 'male' ? 'men' : 'women'}/10.jpg`;
 
   return (
     <View style={styles.container}>
-      {isLoading ? (
-        <Text>Loading...</Text>
-      ) : (
-        <Text style={styles.title}>Welcome, {user?.name || 'Guest'}!</Text>
-      )}
-      <FlatList
-        data={data}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <Link href={`/details/${item.id}`} asChild>
-            <Text style={styles.item}>{item.title}</Text>
-          </Link>
-        )}
+      <Image
+        width={40}
+        height={40}
+        style={styles.profileImage}
+        source={{
+          uri: getImage(),
+        }}
+        resizeMode="cover"
       />
-      <Button title="Go to Drawer" onPress={() => router.push('/(drawer)')} />
-      <Link href="/modal" style={styles.link}>
-        Open modal
-      </Link>
+      <Text
+        style={styles.bio}
+      >{`${creator.firstName} ${creator.lastName}`}</Text>
+      <AppText style={styles.bio} text={`Company: ${creator.company.name}`} />
+      <Text style={styles.bio}>{creator.email}</Text>
+      <Text style={styles.bio}>Gender: {creator.gender}</Text>
+      <Animated.View style={[styles.followButton, animatedStyle]}>
+        <AppButton
+          title={isFollowing.value ? 'Unfollow' : 'Follow'}
+          onPress={() => toggleFollow(Number(creatorId))}
+        />
+      </Animated.View>
+      <View className="flex-row">
+        <AppButton
+          title="View Posts"
+          onPress={() => router.push(`/posts/${creatorId}`)}
+        />
+        <AppButton
+          title="Messages"
+          onPress={() => router.push('/(tabs)/mesaging')}
+        />
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 16,
-  },
-  title: {
-    fontSize: 24,
-    fontFamily: 'Inter-Bold',
-    marginBottom: 16,
-  },
-  item: {
-    padding: 8,
-    fontSize: 16,
-    fontFamily: 'Inter-Regular',
-  },
-  link: {
-    paddingTop: 20,
-    fontSize: 20,
-  },
+  container: { flex: 1, alignItems: 'center', padding: 20 },
+  profileImage: { width: 150, height: 150, borderRadius: 75, marginBottom: 20 },
+  bio: { fontSize: 12, marginBottom: 10 },
+  followButton: { borderRadius: 8, marginBottom: 20 },
 });

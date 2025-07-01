@@ -1,5 +1,5 @@
-import { render, fireEvent } from '@testing-library/react-native';
-import Button from '../Button';
+import { fireEvent, render } from '@testing-library/react-native';
+import Button from '../AppButton';
 
 describe('Button', () => {
   it('renders correctly', () => {

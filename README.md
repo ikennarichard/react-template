@@ -1,25 +1,20 @@
-# MyApp
+# Creator Profile App
 
-A scalable React Native app built with Expo Router, TypeScript, and modern tools.
+A simple app with a creator profile screen, a posts feed, a follow button, and basic messaging, incorporating TypeScript, React Navigation, state management, animations, and CI/CD setup. 
 
-## Setup
+## Features
 
-1. Install dependencies: `yarn install`
-2. Start dev server: `npx expo start`
-3. Run tests: `yarn test`
-4. Lint code: `yarn lint`
+- Creator Profile Screen: Displays a creator’s bio, profile image, and follow button.
+- Posts Feed: A FlatList of posts with images, optimized for performance.
+- Messaging Screen: Basic chat UI with a mock real-time messaging feature.
+- Navigation: Use React Navigation for seamless transitions.
+- Animations: Smooth transitions and button animations using Reanimated.
+- API Integration: Fetch creator data and posts from a mock API (e.g., JSONPlaceholder).
+- State Management: Use Context API for simplicity (or Redux if preferred).
+- TypeScript: Ensure type safety.
+- Deployment: Set up for Expo EAS and GitHub Actions for CI/CD.
 
-## Folder Structure
+## Tech Stack
 
-- `src/app/`: Expo Router navigation files
-- `src/`: Components, hooks, services, store, types, utils
-- `assets/`: Fonts, images
-
-## Key Dependencies
-
-- Expo Router: File-based navigation
-- TypeScript: Type safety
-- Zustand: State management
-- TanStack Query: API fetching
-- React Native Paper: UI components
-- Sentry: Error tracking
+- Expo
+- TypeScript

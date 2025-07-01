@@ -1,11 +1,20 @@
 import { create } from 'zustand';
 
-interface AppState {
-  user: { name: string; id: string } | null;
-  setUser: (user: { name: string; id: string } | null) => void;
-}
+type AppState = {
+  isAuthenticated: boolean;
+  setAuthenticated: (value: boolean) => void;
+  followedCreators: number[];
+  toggleFollow: (creatorId: number) => void;
+};
 
 export const useAppStore = create<AppState>((set) => ({
-  user: null,
-  setUser: (user) => set({ user }),
+  isAuthenticated: false,
+  setAuthenticated: (value) => set({ isAuthenticated: value }),
+  followedCreators: [],
+  toggleFollow: (creatorId) =>
+    set((state) => ({
+      followedCreators: state.followedCreators.includes(creatorId)
+        ? state.followedCreators.filter((id) => id !== creatorId)
+        : [...state.followedCreators, creatorId],
+    })),
 }));
