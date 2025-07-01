@@ -73,14 +73,14 @@ export default function HomeScreen() {
           onPress={() => toggleFollow(Number(creatorId))}
         />
       </Animated.View>
-      <View className="flex-row">
+      <View className="flex-row gap-3">
         <AppButton
           title="View Posts"
           onPress={() => router.push(`/posts/${creatorId}`)}
         />
         <AppButton
           title="Messages"
-          onPress={() => router.push('/(tabs)/mesaging')}
+          onPress={() => router.push('/(tabs)/messaging')}
         />
       </View>
     </View>
@@ -88,8 +88,23 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, alignItems: 'center', padding: 20 },
-  profileImage: { width: 150, height: 150, borderRadius: 75, marginBottom: 20 },
-  bio: { fontSize: 12, marginBottom: 10 },
-  followButton: { borderRadius: 8, marginBottom: 20 },
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    padding: 20,
+  },
+  profileImage: {
+    width: 150,
+    height: 150,
+    borderRadius: 75,
+    marginBottom: 20,
+  },
+  bio: {
+    fontSize: 12,
+    marginBottom: 10,
+  },
+  followButton: {
+    borderRadius: 8,
+    marginBottom: 20,
+  },
 });

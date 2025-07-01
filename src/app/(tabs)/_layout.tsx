@@ -24,7 +24,7 @@ export default function TabLayout() {
         options={{
           title: 'Messages',
           tabBarIcon: ({ color }) => (
-            <Icon name="message" size={24} color={color} />
+            <Icon name="messenger" size={24} color={color} />
           ),
         }}
       />

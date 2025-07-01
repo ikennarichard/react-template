@@ -25,8 +25,20 @@ export default function AppButton({
 }
 
 const styles = StyleSheet.create({
-  base: { padding: 12, borderRadius: 8, alignItems: 'center' },
-  primary: { backgroundColor: '#007AFF' },
-  secondary: { backgroundColor: '#6B7280' },
-  text: { color: '#fff', fontSize: 16, fontFamily: 'Inter-Bold' },
+  base: {
+    padding: 12,
+    borderRadius: 8,
+    alignItems: 'center',
+  },
+  primary: {
+    backgroundColor: 'gray',
+  },
+  secondary: {
+    backgroundColor: '#6B7280',
+  },
+  text: {
+    color: '#fff',
+    fontSize: 16,
+    fontFamily: 'Inter-Bold',
+  },
 });

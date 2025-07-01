@@ -1,7 +1,6 @@
-import * as React from 'react';
-import { View, Text, StyleSheet, FlatList } from 'react-native';
-import FastImage from 'react-native-fast-image';
 import { useLocalSearchParams } from 'expo-router';
+import * as React from 'react';
+import { FlatList, StyleSheet, Text, View, Image } from 'react-native';
 import { getPosts } from '../../services/api';
 
 interface Post {
@@ -33,7 +32,7 @@ const PostsScreen = () => {
   const renderItem = React.useCallback(
     ({ item }: { item: Post }) => (
       <View style={styles.postContainer}>
-        <FastImage style={styles.postImage} source={{ uri: item.image }} />
+        <Image style={styles.postImage} source={{ uri: item.image }} />
         <Text style={styles.postTitle}>{item.title}</Text>
         <Text style={styles.postBody}>{item.body}</Text>
       </View>
@@ -47,7 +46,6 @@ const PostsScreen = () => {
       renderItem={renderItem}
       keyExtractor={(item) => item.id.toString()}
       getItemLayout={(data, index) => ({
-        // get item layout
         length: 320,
         offset: 320 * index,
         index,
